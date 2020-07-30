@@ -1,0 +1,114 @@
+
+
+
+<div class="main-card mb-3 card">
+
+    
+
+
+    <div class="card-body">
+
+        <form (submit)="updateUser()">
+
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="etat==1" >
+                <strong>Votre Modification a été prise en compte</strong> 
+               
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="etat==2">
+                <strong>Votre Modification à échouer ,Veillez reassayer plus tard</strong> 
+                
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            <div class="form-row">
+                
+                <div class="col-md-6">
+                    <div class="position-relative form-group">
+                      <label  class="">Nom </label>
+                      <input name="fullName" [(ngModel)]="Userdata.fullName"  type="text" class="form-control"></div>
+                </div>
+           
+               
+                <div class="col-md-6">
+                    <div class="position-relative form-group">
+                      <label  class="">Prenom</label>
+                      <input name="last_name" [(ngModel)]="Userdata.last_name"  type="text" class="form-control">
+                </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                
+                <div class="col-md-6">
+                    <div class="position-relative form-group">
+                      <label  class="">Mot de passe</label>
+                      <input name="password" [(ngModel)]="Userdata.password"  type="text" class="form-control"></div>
+                </div>
+
+               
+                <div class="col-md-6">
+                    <div class="position-relative form-group">
+                      <label  class="">choisir le niveau d'habilitation</label>
+                        <select  name="hab" [(ngModel)]="Userdata.hab"   class="form-control">
+                          <option value="init">veillez selectionner</option>
+                          <option value="admin">Administrateur</option>
+                          <option value="user">Utilisateur</option>
+
+                      </select>
+                </div>
+                </div>
+            </div>
+            <div class="position-relative form-check">
+                <button type="submit" class="mt-2 btn btn-primary" >Modifier</button>
+                </div>
+            </form>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="etat==3" >
+                <strong>l'utilisateur à supprimé</strong> 
+               
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="etat==4">
+                <strong>la supression de l'utilisateur à échouer ,Veillez reassayer plus tard</strong> 
+                
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+        <h5 class="card-title">Tableau des Utilisateurs</h5>
+        <table class="mb-0 table table-hover">
+            <thead>
+            <tr>
+                
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>email</th>
+                <th>Niveau d'Habilitation</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="User.user.length !== 0">
+            <tr *ngFor="let user of User.user">
+               
+                <td>{{user.fullName}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.hab}}</td>
+                <td> <button class="mb-2 mr-2 btn btn-danger" (click)=" deleteUser(user._id)"><i class="pe-7s-trash" ></i></button><button class="mb-2 mr-2 btn btn-warning" (click)=" compt(user.email)"><i class="fa fa-edit"></i></button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

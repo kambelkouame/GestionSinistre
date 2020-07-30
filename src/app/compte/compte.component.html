@@ -1,0 +1,175 @@
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Language" content="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Espace de gestion </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="description" content="''">
+        <meta name="msapplication-tap-highlight" content="no">
+    
+    
+    </head>
+    <body>
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            <div class="app-header header-shadow">
+              
+               
+                <div class="app-header__menu">
+                    <span>
+                        <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                            <span class="btn-icon-wrapper">
+                                <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            </span>
+                        </button>
+                    </span>
+                </div>    <div class="app-header__content">
+                 <a href="/home"> <button class="btn btn-primary">retour</button> </a> 
+                 
+                </div>
+            </div>
+                   <div class="app-main">
+                    
+                      <div class="app-main__outer">
+                        <div class="app-main__inner">
+                            <div class="app-page-title">
+                                <div class="page-title-wrapper">
+                                    <div class="page-title-heading">
+                                        <div class="page-title-icon">
+                                            <i class="pe-7s-help1 icon-gradient bg-night-fade"> </i>
+                                        </div>
+                                        <div>Paramètres
+                                        </div>
+                                    </div>
+    
+                            </div>
+                            </div>
+    
+    
+    
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="main-card mb-3">
+    
+                                        <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+                                            <li class="nav-item">
+                                                 <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
+                                                    <span>Profile</span>
+                                                </a>
+                                            </li>
+                                                <li class="nav-item" *ngIf="Userdata.hab=='admin'">
+                                                    <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
+                                                     <span>Ajouter un utilisateur</span>
+                                                    </a>
+                                                </li>
+                                        </ul>
+    
+    
+                                    <div class="tab-content">
+                                         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                                          <form>
+    
+                                            <div class="main-card mb-3 card">
+                                               
+                                                <div class="card-body"> 
+                                                    <div class="main-card mb-3">
+                                                        <div class="card-body">
+                                                            <h3 class="card-title">Profile</h3>
+                                                        <form (submit)="updateUser()">
+                                                            <div class="form-row">
+                                                                
+                                                                <div class="col-md-6">
+                                                                    <div class="position-relative form-group">
+                                                                      <label  class="">Mot de passe</label>
+                                                                      <input name="prenomAssure" [(ngModel)]="Userdata.password"  type="text" class="form-control"></div>
+                                                                </div>
+                                                           
+                                                               
+                                                                <div class="col-md-6">
+                                                                    <div class="position-relative form-group">
+                                                                      <label  class="">choisir le niveau d'habilitation</label>
+                                                                        <select  name="hab" [(ngModel)]="Userdata.hab"   class="form-control">
+                                                                          <option value="init">veillez selectionner</option>
+                                                                          <option value="admin">Administrateur</option>
+                                                                          <option value="user">Utilisateur</option>
+              
+                                                                      </select>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative form-check">
+                                                                <button type="submit" class="mt-2 btn btn-primary" >Modifier</button>
+                                                                </div>
+                                                            </form>
+                                                            </div>
+                                                            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="etat==1">
+                                                                <strong>Votre Modification a été prise en compte</strong> 
+                                                               
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                              </div>
+
+                                                              <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="etat==2">
+                                                                <strong>Votre Modification à échouer ,Veillez reassayer plus tard</strong> 
+                                                                
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                              </div>
+                                                          </div>
+                                                 
+    
+                                               
+                                                  </div>
+                                                </div>
+    
+    
+                                              
+                                                  
+                                      </form>
+                                    </div>
+    
+                                    <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel" >
+                                        <div class="main-card mb-3 card">
+                                            <div class="card-body">
+    
+                                                <app-register></app-register>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                 </div>
+                             </div>
+                        </div>
+                     </div>
+                        <app-table></app-table>
+    
+                        </div>
+                        <div class="app-wrapper-footer">
+                            <div class="app-footer">
+                                <div class="app-footer__inner">
+    
+                                    <div class="app-footer-right">
+                                        <ul class="nav">
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
+                                                    SCCONAS
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    </div>
+                    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+            </div>
+        </div>
+    </body>
+    </html>
+    
+    

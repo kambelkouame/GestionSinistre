@@ -1,0 +1,879 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Espace de gestion </title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+  <meta name="description" content="''">
+  <script>
+
+
+  </script>
+</head>
+
+
+
+<body>
+  <div class="container app-theme-white body-tabs-shadow">
+
+    <div class="app-main">
+
+
+      <div class="app-main__outer">
+        <div class="app-main__inner">
+
+          <div class="app-page-title">
+
+            <img style="margin-left:300px;" src="../../assets/images/scconas.jpeg" />
+            <div class="page-title-wrapper">
+              <div class="page-title-heading">
+
+                <div class="page-title-icon">
+                  <i class="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                </div>
+                <div>DECLARATION DE SINISTRE
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          
+
+          <!---formulaire de declaration des sinistres avec Numero de police-->
+          <div class="row" *ngIf="initialVue==2">
+
+            <div *ngIf="loader==0" style="margin-top: 630px;padding-left: 300px;">
+              <app-loader></app-loader>
+            </div>
+            <div class="col-md-12">
+
+
+              <div class="col-sm-12"  *ngIf="loader==1">
+                <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="position-relative form-group">
+                       <br> <h4> CHOISISSEZ LE NUMERO DE SINISTRE</h4>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="position-relative form-group">
+                       <br>
+                       <select (change)="onChange($event.target.value)" class="form-control">
+                        <option>Veilllez selectionner</option>
+                        <option *ngFor="let numero of UserInfo" [value]="numero.numeroCP">{{numero.numeroCP}}
+                        </option>
+                        <!--<option>{{UserInfo[0].numeroCP}}</option>-->
+                      </select>
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="main-card mb-3">
+
+                <div class="tab-content" *ngIf="vue==1">
+                  <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel"
+                    *ngIf="section==0">
+                    <form (submit)="addSinistre()">
+
+                  
+                      <h5 class="card-title">INFORMATION SUR L'ASSURE</h5>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> NOM DE L'ASSURE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="nomAssure" placeholder="Votre Nom" [(ngModel)]="Userdata.nomAssure" type="text"
+                                  class="form-control"  #nomAssure="ngModel"  id="nomAssure" required >
+                                  <div [hidden]="nomAssure.valid || nomAssure.pristine"
+                                  class="alert alert-danger">
+                                Votre nom est obligatoire
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> PRENOM DE L'ASSURE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="prenomAssure" placeholder="Votre prenom" [(ngModel)]="Userdata.prenomAssure" type="text"
+                                  class="form-control"   #prenomAssure="ngModel"  id="prenomAssure" required>
+                                  <div [hidden]="prenomAssure.valid || prenomAssure.pristine"
+                                  class="alert alert-danger">
+                                Votre prenom est obligatoire
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row"
+                         >
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> EMAIL</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="email" placeholder="email@email.com" [(ngModel)]="Userdata.email" type="email"
+                                  class="form-control" pattern="[^ @]*@[^ @]*"   #email="ngModel"  id="email" required>
+                                  <div [hidden]="email.valid || email.pristine"
+                                      class="alert alert-danger">
+                                    email obligatoire
+                                  </div>
+
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> NUMERO DE TELPHONE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="contactAssure" placeholder="Ex:225 XX XX XX XX" [(ngModel)]="Userdata.contactAssure" type="number"
+                                  class="form-control" #contactAssure="ngModel"  id="contactAssure" minlength="11" required >
+                                  <div [hidden]="contactAssure.valid || contactAssure.pristine"
+                                  class="alert alert-danger">
+                                Votre Numero télephone est obligatoire
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> MARQUE DU VEHICULE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="vehicule" placeholder="Marque du vehicule" [(ngModel)]="Userdata.vehicule" type="text"
+                                  class="form-control"  #vehicule="ngModel"  id="vehicule" required  >
+                                  <div [hidden]="vehicule.valid || vehicule.pristine"
+                                  class="alert alert-danger">
+                                le marque de votre vehicule est obligatoire
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> IMMATRICULATION</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="immatriculation" placeholder="immatriculation" [(ngModel)]="Userdata.immatriculation" type="text"
+                                  class="form-control" #immatriculation="ngModel"  id="immatriculation" required>
+                                  <div [hidden]="vehicule.valid || vehicule.pristine"
+                                  class="alert alert-danger">
+                                l'immatriculation de votre véhicule est obligatoire
+                              </div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> ASSURANCE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="assurance" placeholder="Assurance" [(ngModel)]="Userdata.assurance" type="text"
+                                  class="form-control"  #assurance="ngModel"  id="assurance" required >
+                                  <div [hidden]="assurance.valid || assurance.pristine"
+                                  class="alert alert-danger">
+                                le nom de votre assurance est obligatoire
+                              </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    
+
+
+              
+                      <h5 class="card-title">INFORMATION SUR LE SINISTRE</h5>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> LIEU DU SINISTRE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="lieuSinistre" placeholder="Ex:Ville,Commune,quartier,rue" [(ngModel)]="Userdata.lieuSinistre" type="text"
+                                  class="form-control"   #lieuSinistre="ngModel"  id="lieuSinistre" required  >
+                                
+                                  <div [hidden]="lieuSinistre.valid || lieuSinistre.pristine"
+                                  class="alert alert-danger">
+                                le lieu de votre sinistre est obligatoire
+                              </div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> DATE DU SINISTRE</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input type='date' name="date_sinistre" [(ngModel)]="Userdata.date_sinistre"
+                                  class="form-control"  #date="ngModel"  id="date" required>
+                                
+                                  <div [hidden]="date.valid || date.pristine"
+                                  class="alert alert-danger">
+                                la date de votre sinistre est obligatoire
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4>  FAITES UNE DESCRIPTION DE LA SCENE SUIVI D'UNE LISTE DES DOMMAGES APPARENTS</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                               <textarea type="text"  name="description" placeholder="Description" [(ngModel)]="Userdata.description" class="form-control"  #description="ngModel"  id="description" required></textarea>
+                               <div [hidden]="description.valid || description.pristine"
+                               class="alert alert-danger">
+                             la description de votre sinistre est obligatoire
+                           </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> AVEZ VOUS UN CONSTAT?</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                               
+                                
+                                  <select name="avisConstat" [(ngModel)]="avisConstat" class="form-control">
+                                    <option Value="init" >Veilllez selectionner</option>
+                                    <option Value="oui">Oui</option>
+                                    <option  Value="non">Non</option>
+                                   
+                                  </select>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12" *ngIf="avisConstat=='oui'">
+                        <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                        
+                          <div class="form-row">
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br> <h4> DANS QUEL COMMISSARIAT AVEZ VOUS EFFECTUE LE CONSTAT DE POLICE?</h4>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="position-relative form-group">
+                               <br>
+                                <input name="commissariat" [(ngModel)]="Userdata.commissariat" placeholder="Ex:Commune,Commissariat du N' Arrondissement" type="text"
+                                  class="form-control" ></div>
+                            </div>
+                          </div>
+                        </div>
+                      
+
+                  </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                    
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="position-relative form-group">
+                           <br> <h4>OU EST STATIONNE LE VEHICULE?</h4>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="position-relative form-group">
+                           <br>
+                            <input name="coordVehicule" [(ngModel)]="Userdata.coordVehicule" type="text"
+                             placeholder="Ex: Ville,Commune,Qartier,Rue/Garage" class="form-control" ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="position-relative form-check">
+
+                    <button class="btn btn-primary" type="submit">
+                      Envoyer</button>
+                  </div>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="info=='succes'">
+                    <strong>Votre déclaration a été bien enregistrée,</strong> Veillez importer les documents pour
+                    compl-èter la déclaration
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="info=='champs'">
+                    <strong>Veillez vérifier que tous les champs ont bien été remplis</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Demande si l'utilisateur a un numero de police-->
+          
+          <div style="margin-top: 60px;padding-left: 300px;" *ngIf="initialVue==0">
+            <div class="card col-md-8">
+              <div class="card-body">
+                <h2 class="text-center">Avez-vous un numéro de police?</h2>
+               
+                <div  style="margin-top: 30px;padding-left: 30px;">
+                  
+                  <div class="modal-footer">
+                    <button class="row justify-content-between"  type="button"  (click)="changed($event)"  class="btn btn-primary">Non</button>
+                 
+                    <button type="button"    class="btn btn-primary" (click)="chang($event)">Oui</button>
+            
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+         
+
+
+        <!--Formulaire de declaration des siniste sans numero de police-->
+
+        <div class="row" *ngIf="initialVue==1">
+          <div class="col-md-12">
+            <div class="main-card mb-3">
+
+              <div class="tab-content" >
+                <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel" *ngIf="section==0">
+                  <form (submit)="addSinistre()">
+
+                  
+                        <h5 class="card-title">INFORMATION SUR L'ASSURE</h5>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> NOM DE L'ASSURE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="nomAssure" placeholder="Votre Nom" [(ngModel)]="Userdata.nomAssure" type="text"
+                                    class="form-control"  #nomAssure="ngModel"  id="nomAssure" required >
+                                    <div [hidden]="nomAssure.valid || nomAssure.pristine"
+                                    class="alert alert-danger">
+                                  Votre nom est obligatoire
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> PRENOM DE L'ASSURE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="prenomAssure" placeholder="Votre prenom" [(ngModel)]="Userdata.prenomAssure" type="text"
+                                    class="form-control"   #prenomAssure="ngModel"  id="prenomAssure" required>
+                                    <div [hidden]="prenomAssure.valid || prenomAssure.pristine"
+                                    class="alert alert-danger">
+                                  Votre prenom est obligatoire
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row"
+                           >
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> EMAIL</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="email" placeholder="email@email.com" [(ngModel)]="Userdata.email" type="email"
+                                    class="form-control" pattern="[^ @]*@[^ @]*"   #email="ngModel"  id="email" required>
+                                    <div [hidden]="email.valid || email.pristine"
+                                        class="alert alert-danger">
+                                      email obligatoire
+                                    </div>
+
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> NUMERO DE TELPHONE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="contactAssure" placeholder="Ex:225 XX XX XX XX" [(ngModel)]="Userdata.contactAssure" type="number"
+                                    class="form-control" #contactAssure="ngModel"  id="contactAssure" minlength="11" required >
+                                    <div [hidden]="contactAssure.valid || contactAssure.pristine"
+                                    class="alert alert-danger">
+                                  Votre Numero télephone est obligatoire
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> MARQUE DU VEHICULE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="vehicule" placeholder="Marque du vehicule" [(ngModel)]="Userdata.vehicule" type="text"
+                                    class="form-control"  #vehicule="ngModel"  id="vehicule" required  >
+                                    <div [hidden]="vehicule.valid || vehicule.pristine"
+                                    class="alert alert-danger">
+                                  le marque de votre vehicule est obligatoire
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> IMMATRICULATION</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="immatriculation" placeholder="immatriculation" [(ngModel)]="Userdata.immatriculation" type="text"
+                                    class="form-control" #immatriculation="ngModel"  id="immatriculation" required>
+                                    <div [hidden]="vehicule.valid || vehicule.pristine"
+                                    class="alert alert-danger">
+                                  l'immatriculation de votre véhicule est obligatoire
+                                </div></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> ASSURANCE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="assurance" placeholder="Assurance" [(ngModel)]="Userdata.assurance" type="text"
+                                    class="form-control"  #assurance="ngModel"  id="assurance" required >
+                                    <div [hidden]="assurance.valid || assurance.pristine"
+                                    class="alert alert-danger">
+                                  le nom de votre assurance est obligatoire
+                                </div>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      
+
+
+                
+                        <h5 class="card-title">INFORMATION SUR LE SINISTRE</h5>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> LIEU DU SINISTRE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="lieuSinistre" placeholder="Ex:Ville,Commune,quartier,rue" [(ngModel)]="Userdata.lieuSinistre" type="text"
+                                    class="form-control"   #lieuSinistre="ngModel"  id="lieuSinistre" required  >
+                                  
+                                    <div [hidden]="lieuSinistre.valid || lieuSinistre.pristine"
+                                    class="alert alert-danger">
+                                  le lieu de votre sinistre est obligatoire
+                                </div></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> DATE DU SINISTRE</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input type='date' name="date_sinistre" [(ngModel)]="Userdata.date_sinistre"
+                                    class="form-control"  #date="ngModel"  id="date" required>
+                                  
+                                    <div [hidden]="date.valid || date.pristine"
+                                    class="alert alert-danger">
+                                  la date de votre sinistre est obligatoire
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4>  FAITES UNE DESCRIPTION DE LA SCENE SUIVI D'UNE LISTE DES DOMMAGES APPARENTS</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                 <textarea type="text"  name="description" placeholder="Description" [(ngModel)]="Userdata.description" class="form-control"  #description="ngModel"  id="description" required></textarea>
+                                 <div [hidden]="description.valid || description.pristine"
+                                 class="alert alert-danger">
+                               la description de votre sinistre est obligatoire
+                             </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> AVEZ VOUS UN CONSTAT?</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                 
+                                  
+                                    <select name="avisConstat" [(ngModel)]="avisConstat" class="form-control">
+                                      <option Value="init" >Veilllez selectionner</option>
+                                      <option Value="oui">Oui</option>
+                                      <option  Value="non">Non</option>
+                                     
+                                    </select>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12" *ngIf="avisConstat=='oui'">
+                          <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                          
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br> <h4> DANS QUEL COMMISSARIAT AVEZ VOUS EFFECTUE LE CONSTAT DE POLICE?</h4>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="position-relative form-group">
+                                 <br>
+                                  <input name="commissariat" [(ngModel)]="Userdata.commissariat" placeholder="Ex:Commune,Commissariat du N' Arrondissement" type="text"
+                                    class="form-control" ></div>
+                              </div>
+                            </div>
+                          </div>
+                        
+
+                    </div>
+
+
+                    <div class="col-sm-12">
+                      <div class="c-callout c-callout-primary"  style="background-color: #F2F2F2; border-radius: 4px;">
+                      
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="position-relative form-group">
+                             <br> <h4>OU EST STATIONNE LE VEHICULE?</h4>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="position-relative form-group">
+                             <br>
+                              <input name="coordVehicule" [(ngModel)]="Userdata.coordVehicule" type="text"
+                               placeholder="Ex: Ville,Commune,Qartier,Rue/Garage" class="form-control" ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="position-relative form-check">
+
+                      <button class="btn btn-primary" type="submit">
+                        Envoyer</button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="info=='succes'">
+                      <strong>Votre déclaration a été bien enregistrée,</strong> Veillez importer les documents pour
+                      compl-èter la déclaration
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="info=='champs'">
+                      <strong>Veillez vérifier que tous les champs ont bien été remplis</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+<div *ngIf="loader==100" style="margin-top: 200px;padding-left: 300px;">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h2 class="text-center">Vous n'avez pas de contrat valide</h2>
+      <h3 class="text-center"> Veillez contacter votre gestion pour plus d'information</h3>
+      <button class="btn btn-primary text-center "> retour</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loader==100" style="margin-top: 200px;padding-left: 300px;">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h2 class="text-center">Vous n'etes pas autorisé</h2>
+      <h3 class="text-center"> Veillez vous connecter normalement</h3>
+      <button class="btn btn-primary text-center "> retour</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loader==2000" style="margin-top: 200px;padding-left: 300px;">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h2 class="text-center">Probleme de décryptage</h2>
+      <h3 class="text-center"> Veille contacter les administrateurs</h3>
+      <button class="btn btn-primary text-center "> retour</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="initialVue==3" style="margin-top: 100px;padding-left: 300px;">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h2 class="text-center">Votre déclaration a été validée avec succès</h2>
+      <h3 class="text-center">Vous recevrez un mail de la part de votre gestionnaire SCCONAS pour le suivie de votre
+        sinistre
+      </h3>
+      <button class="btn btn-primary text-center "> retour</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="initialVue==4" style="margin-top: 70px;padding-left: 300px;">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h2 class="text-center">Vous n'avez aucun contrat valide</h2>
+      <h3 class="text-center">Veillez souscrire à un contrat d'assurance avant d'éffectuer une declaration 
+        sinistre
+      </h3>
+      <button class="btn btn-primary text-center "> retour</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<h3 >Veillez importer les documents suivant!</h3>
+<h5>1.Constats de de police</h5>
+<h5>2.Expertises</h5>
+<h5>3.Permis de conduire</h5>
+<h5>4.Photos du sinistre</h5>
+<h5>5.Facture des reparations(Si le vehicule à déja été réparé)
+</h5>
+<h5>Veillez Faire une selection multiple de vos documents (CRTL+Click) apres avoir clické sur le button</h5>
+<div>
+  <form>
+    <div>
+      <input type="file" name="images" multiple (change)="selectMultipleImage($event)" />
+    </div>
+    <br>
+    {{ this.response }}
+    <div>
+      <button type="submit" class="mt-2 btn btn-primary" (click)="onMultipleSubmit()">Envoyer</button>
+    </div>
+  </form>
+</div>

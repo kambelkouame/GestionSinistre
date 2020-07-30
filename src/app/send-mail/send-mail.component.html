@@ -1,0 +1,40 @@
+<form >
+
+    <div class="center">
+        
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+              
+              <input name="sender" placeholder="De:" [(ngModel)]="Userdata.sender"  type="text" class="form-control"></div>
+        </div>
+   
+       
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+              
+              <input name="receiver"  placeholder="à:"  [(ngModel)]="Userdata.receiver"  type="text" class="form-control">
+        </div>
+        </div>
+       <div>
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+              
+              <input name="objet" placeholder="Objet:"  [(ngModel)]="Userdata.objet"  type="text" class="form-control"></div>
+        </div>
+   
+    </div>
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+             
+               <textarea name="message" placeholder="Message:"  [(ngModel)]="Userdata.message"  type="text" class="form-control"></textarea>
+             
+            </div>
+        </div>
+      
+    
+    <div class="position-relative form-check">
+        <button type="submit" class="mt-2 btn btn-primary" >Envoyer</button>
+        </div>
+
+    </div>
+    </form>
